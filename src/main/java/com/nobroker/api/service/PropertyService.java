@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PropertyService {
     PropertyDTO saveProperty(PropertyDTO propertyDTO);
-    boolean setPropertyAvailable(Long id);
+    boolean setPropertyAvailable(long id);
     List<PropertyDTO> getApprovedProperties();
 }
 

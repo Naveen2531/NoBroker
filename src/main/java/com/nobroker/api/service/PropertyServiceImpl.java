@@ -1,6 +1,7 @@
 package com.nobroker.api.service;
 
 import com.nobroker.api.entity.Property;
+import com.nobroker.api.exception.ResourceNotFoundException;
 import com.nobroker.api.payload.PropertyDTO;
 import com.nobroker.api.repository.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +55,9 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public boolean setPropertyAvailable(Long id) {
-        Property property = propertyRepository.findById(id).orElse(null);
+    public boolean setPropertyAvailable(long id) {
+        Property property = propertyRepository.findById(id).
+                orElseThrow(()->new ResourceNotFoundException(id));
         if (property != null) {
             property.setStatus("Available");
             propertyRepository.save(property);
